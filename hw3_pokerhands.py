@@ -4,7 +4,7 @@
 # A program that simulates several instances in a poker game
 
 from random import shuffle
-
+from multiprocessing import Process
 
 # Creates a player with a hand that can draw cards from the top of a deck
 class Player:
@@ -131,9 +131,17 @@ def b_got_pair_after_a_got_no_pair(total):
 
 
 def run(times):
-    a_got_pair(times)
-    b_got_pair(times)
-    b_got_pair_after_a_got_no_pair(times)
+    p1 = Process(target=a_got_pair, args=[times,])
+    p2 = Process(target=b_got_pair, args=[times,])
+    p3 = Process(target=b_got_pair_after_a_got_no_pair, args=[times,])
+
+    p1.start()
+    p2.start()
+    p3.start()
+    
+    p1.join()
+    p2.join()
+    p3.join()
 
 
 run(2598960)
