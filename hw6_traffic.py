@@ -35,7 +35,10 @@ class Intersection:
             self.light = Light.Red
             self.time_on_light = 0
         elif self.light == Light.Red and self.time_on_light == self.red_time:
-            self.light = Light.Left
+            if self.left_time != 0:
+                self.light = Light.Left
+            else:
+                self.light = Light.Green
             self.time_on_light = 0
         else:
             self.time_on_light += 1
@@ -67,6 +70,11 @@ for _ in range(10000):
         # Left turn on left light at four
         if car.current_intersection is four and four.light is Light.Left:
             car.current_intersection = three
+            if three.light is Light.Left:
+                three.light = Light.Red
+            three.left_time = 0
+            three.green_time = 30
+            three.red_time = 70
             travel_time += 1
 
         # Left turn on green light at four
@@ -76,6 +84,11 @@ for _ in range(10000):
             else:
                 travel_time += 1
             car.current_intersection = three
+            if three.light is Light.Left:
+                three.light = Light.Red
+            three.left_time = 0
+            three.green_time = 30
+            three.red_time = 70
 
         # right turn on green light at three
         elif car.current_intersection is three and three.light is Light.Green:
@@ -125,6 +138,11 @@ for _ in range(10000):
         elif car.current_intersection is two and two.light is Light.Left:
             car.current_intersection = one
             travel_time += 1
+            if one.light is Light.Left:
+                one.light = Light.Red
+            one.left_time = 0
+            one.green_time = 50
+            one.red_time = 50
 
         # Left at green light at two
         elif car.current_intersection is two and two.light is Light.Green:
@@ -133,6 +151,11 @@ for _ in range(10000):
             else:
                 travel_time += 1
             car.current_intersection = one
+            if one.light is Light.Left:
+                one.light = Light.Red
+            one.left_time = 0
+            one.green_time = 50
+            one.red_time = 50
 
         # Finish at green light at one
         elif car.current_intersection is one and one.light is Light.Green:
@@ -179,6 +202,11 @@ for _ in range(10000):
             car.current_intersection = one
             from_two = True
             travel_time += 1
+            if one.light is Light.Left:
+                one.light = Light.Red
+            one.left_time = 0
+            one.green_time = 50
+            one.red_time = 50
 
         # Go left at two if green
         elif car.current_intersection is two and two.light is Light.Green:
@@ -188,6 +216,11 @@ for _ in range(10000):
                 travel_time += 1
             from_two = True
             car.current_intersection = one
+            if one.light is Light.Left:
+                one.light = Light.Red
+            one.left_time = 0
+            one.green_time = 50
+            one.red_time = 50
 
         # Exit at one if green
         elif car.current_intersection is one and one.light is Light.Green:
@@ -205,6 +238,11 @@ for _ in range(10000):
         elif car.current_intersection is four and four.light is Light.Left:
             travel_time += 1
             car.current_intersection = three
+            if three.light is Light.Left:
+                three.light = Light.Red
+            three.left_time = 0
+            three.green_time = 30
+            three.red_time = 70
 
         # Go right at three if green
         elif car.current_intersection is three and three.light is Light.Green:
