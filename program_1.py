@@ -1,3 +1,8 @@
+# Rofael Aleezada
+# March 8 2017
+# CS355 Program 1, Pokerhands
+# A program that simulates 10000 games of poker hands
+
 from random import shuffle
 
 
@@ -57,9 +62,9 @@ for _ in range(10000):
         current_player.draw_card(deck)
         if current_player.has_pair():
             if current_player is player_a:
-                a_win_count += 1
-            else:
                 b_win_count += 1
+            else:
+                a_win_count += 1
             number_of_rounds += rounds_played
             break
 
